@@ -1,0 +1,27 @@
+.gallery {
+    width: 500px;
+    height: 208px;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.gallery-item {
+    margin: 5px;
+}
+
+.gallery-link {
+    display: block;
+    text-decoration: none;
+}
+
+.gallery-image {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+}
