@@ -1,18 +1,13 @@
 .gallery {
-    width: 500px;
-    height: 208px;
     display: flex;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
     flex-wrap: wrap;
-    list-style: none;
     padding: 0;
     margin: 0;
+    list-style-type: none;
 }
 
 .gallery-item {
-    margin: 5px;
+    margin: 10px;
 }
 
 .gallery-link {
@@ -21,7 +16,12 @@
 }
 
 .gallery-image {
-    width: 150px;
-    height: 100px;
-    object-fit: cover;
+    display: block;
+    width: 200px;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery-image:hover {
+    transform: scale(1.1);
 }
