@@ -64,33 +64,44 @@ const images = [
     },
 ];
 
+
+
+
 const gallery = document.querySelector('.gallery');
 
-images.forEach(image => {
+const createGalleryItem = ({ preview, original, description }) => {
     const galleryItem = document.createElement('li');
     galleryItem.classList.add('gallery-item');
 
-    const galleryLink = document.createElement('a');
-    galleryLink.classList.add('gallery-link');
-    galleryLink.href = image.original;
+    const link = document.createElement('a');
+    link.classList.add('gallery-link');
+    link.href = original;
 
-    const galleryImage = document.createElement('img');
-    galleryImage.classList.add('gallery-image');
-    galleryImage.src = image.preview;
-    galleryImage.setAttribute('data-source', image.original);
-    galleryImage.alt = image.description;
+    const image = document.createElement('img');
+    image.classList.add('gallery-image');
+    image.src = preview;
+    image.dataset.source = original;
+    image.alt = description;
+    image.width = 300;
+    image.height = 200;
 
-    galleryLink.appendChild(galleryImage);
-    galleryItem.appendChild(galleryLink);
-    gallery.appendChild(galleryItem);
-});
+    link.appendChild(image);
+    galleryItem.appendChild(link);
 
-gallery.addEventListener('click', e => {
-    e.preventDefault();
-    if (e.target.nodeName !== 'IMG') {
-        return;
-    }
-    const largeImageURL = e.target.dataset.source;
-    const instance = basicLightbox.create(`<img src="${largeImageURL}" width="800" height="600">`);
+    return galleryItem;
+};
+
+const galleryItems = images.map(image => createGalleryItem(image));
+gallery.append(...galleryItems);
+
+gallery.addEventListener('click', event => {
+    event.preventDefault();
+
+    if (event.target.nodeName !== 'IMG') return;
+
+    const instance = basicLightbox.create(`
+            <img src="${event.target.dataset.source}" width="800" height="600">
+        `);
+
     instance.show();
 });
